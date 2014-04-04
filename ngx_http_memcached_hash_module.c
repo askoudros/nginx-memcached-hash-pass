@@ -453,10 +453,10 @@ ngx_http_memcached_hash_filter(void *data, ssize_t bytes)
     ngx_chain_t          *cl, **ll;
     ngx_http_upstream_t  *u;
 
-    u = ctx->request->upstream;
+    u = (size_t) ctx->request->upstream;
     b = &u->buffer;
 
-    if ((size_t)u->length == ctx->rest) {
+    if (u->length == ctx->rest) {
 
         if (ngx_strncmp(b->last,
                    ngx_http_memcached_hash_end + NGX_HTTP_MEMCACHED_HASH_END - ctx->rest,
